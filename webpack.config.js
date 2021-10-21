@@ -1,40 +1,40 @@
-const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === 'production';
 const isDev = !isProd;
 
 const filename = (ext) => (isDev ? `bundle.${ext}` : `bundle.${ext}`);
 
 module.exports = {
-  context: path.resolve(__dirname, "src"),
-  mode: "development",
-  entry: "./index.js",
+  context: path.resolve(__dirname, 'src'),
+  mode: 'development',
+  entry: './index.js',
   output: {
-    filename: filename("js"),
-    path: path.resolve(__dirname, "dist"),
+    filename: filename('js'),
+    path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: [".js"],
+    extensions: ['.js'],
     alias: {
-      "@": path.resolve(__dirname, "src"),
-      "@core": path.resolve(__dirname, "src/core"),
+      '@': path.resolve(__dirname, 'src'),
+      '@core': path.resolve(__dirname, 'src/core'),
     },
   },
-  devtool: isDev ? "source-map" : false,
+  devtool: isDev ? 'source-map' : false,
   devServer: {
     port: 4200,
-    contentBase: path.join(__dirname, "src"),
+    contentBase: path.join(__dirname, 'src'),
   },
 
-  target: isDev ? "web" : "browserslist",
+  target: isDev ? 'web' : 'browserslist',
   plugins: [
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
-      template: "index.html",
+      template: 'index.html',
       minify: {
         removeComments: isProd,
         collapseWhitespace: isProd,
@@ -43,28 +43,28 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "src/favicon.png"),
-          to: path.resolve(__dirname, "dist/favicon.png"),
+          from: path.resolve(__dirname, 'src/favicon.png'),
+          to: path.resolve(__dirname, 'dist/favicon.png'),
         },
       ],
     }),
     new MiniCssExtractPlugin({
-      filename: filename("css"),
+      filename: filename('css'),
     }),
   ],
   module: {
     rules: [
       {
         test: /\.s[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env"],
+            presets: ['@babel/preset-env'],
           },
         },
       },
