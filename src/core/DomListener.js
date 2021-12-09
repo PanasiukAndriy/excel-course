@@ -18,11 +18,15 @@ export class DomListener {
           `method ${method}  is not implemented in ${name} component`
         );
       }
-      this.$root.on(listener, this[method].bind(this));
+      this[method] = this[method].bind(this);
+      this.$root.on(listener, this[method]);
     });
   }
   removeDOMListeners() {
-    //to do
+    this.listeners.forEach((listener) => {
+      const method = getMethodName(listener);
+      this.$root.off(listener, this[method]);
+    });
   }
 }
 
