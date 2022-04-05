@@ -1,6 +1,6 @@
 export function createStore(rootReducer, initialState = {}){
     //щоб не було мутацій, то склонувати... хз to do
-    let state =rootReducer(...initialState, {'__INIT__'});
+    let state = rootReducer(initialState, {type: '__INIT__'});
     let listeners =[];
 
     return {
@@ -11,15 +11,15 @@ export function createStore(rootReducer, initialState = {}){
             //ver 2
             return {
                 unsubscribe(){
-                    listeners = listeners.filter(l => l !== fn);
+                    listeners = listeners.filter(l => (l !== fn));
                 }
             }
 
-        }
+        },
         dispatch(action){
-            state = rootReducer(state, action)
-            listeners.forEach(l => l(state))
-        }
+            state = rootReducer(state, action);
+            listeners.forEach(l => l(state));
+        },
         getState(){
             return state; 
         }

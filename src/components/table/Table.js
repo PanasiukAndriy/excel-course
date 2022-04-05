@@ -35,8 +35,12 @@ export class Table extends ExcelComponent {
       this.selection.current.text(text);      
 
     this.$on('formula:done', () => {
-      this.selection.current.focus(); 
-    })
+      this.selection.current.focus();     
+    });
+
+    this.$subscribe(state => {
+        console.log('TableState', state);
+      })
   });
   }
 
@@ -55,7 +59,7 @@ export class Table extends ExcelComponent {
         const $cells = matrix($target, this.selection.current).map(id => this.$root.find(`[data-id="${id}"]`));
         this.selection.selectGroup($cells);
       } else {
-        this.selection.select($target); 
+        this.selectCell($target); 
       }      
     }
   }  
