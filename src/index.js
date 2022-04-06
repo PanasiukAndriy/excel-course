@@ -11,7 +11,7 @@ import './scss/index.scss';
 
 
 const store = createStore(rootReducer, {
-  tableTitle: 'My table excel'
+  colstate: {}
 });
 
 const excel = new Excel('#app', {
