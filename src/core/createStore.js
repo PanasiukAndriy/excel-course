@@ -1,6 +1,6 @@
 export function createStore(rootReducer, initialState = {}){
     //щоб не було мутацій, то склонувати... хз to do
-    let state = rootReducer(initialState, {type: '__INIT__'});
+    let state = rootReducer({...initialState}, {type: '__INIT__'});
     let listeners =[];
 
     return {
