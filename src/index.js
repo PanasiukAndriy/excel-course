@@ -8,11 +8,16 @@ import {rootReducer} from './redux/rootReducer';
 
 import './module';
 import './scss/index.scss';
+import { storage } from './core/utils';
 
 
-const store = createStore(rootReducer, {
-  colstate: {}
+const store = createStore(rootReducer, storage('excel-state'));
+
+store.subscribe(state => {
+  console.log(' app state', state);
+  storage('excel-state', state);
 });
+
 
 const excel = new Excel('#app', {
   components: [Header, Toolbar, Formula, Table], store});
