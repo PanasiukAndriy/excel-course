@@ -5,6 +5,7 @@ import { resizeHandler } from './table.resize';
 import { isCell, shouldResize, nextSelector } from './table.functions';
 import { TableSelection } from './TableSelection';
 import { matrix, range } from '../../core/utils';
+import 'regenerator-runtime/runtime';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table';
@@ -49,9 +50,11 @@ export class Table extends ExcelComponent {
     this.$emit('table:select', $cell);
   }
 
+
   async resizeTable(event){
     try {      
-      const data = await resizeHandler(this.$root, event)  
+      const data = await resizeHandler(this.$root, event);
+      this.$dispatch({type: 'TABLE_RESIZE'. data});
       console.log('Data', data)
     } catch(e)
     {
