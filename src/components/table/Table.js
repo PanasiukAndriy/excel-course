@@ -34,7 +34,8 @@ export class Table extends ExcelComponent {
     this.selectCell($cell);
 
     this.$on('formula:input', text => {
-      this.selection.current.text(text)
+      this.selection.current.text(text);
+      this.updateTextInStore(text)
     });      
 
     this.$on('formula:done', () => {
@@ -97,8 +98,18 @@ export class Table extends ExcelComponent {
     }
   }
 
+  updateTextInStore(value){
+    const text = $(event.target).text();
+    this.$dispatch(actions.changeText({
+      id: this.selection.current.id(),
+      value
+    }));
+  }
+
   onInput(event) {
-    this.$emit('table:input', $(event.target))
+    //this.$emit('table:input', $(event.target)) // тепер робимо через Сторе
+    this.updateTextInStore($(event.target).text())
+    
   }
 }
 
