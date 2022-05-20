@@ -41,7 +41,7 @@ export class Table extends ExcelComponent {
 
     this.$on('formula:done', () => {
       this.selection.current.focus();     
-    });
+    }); 
 
     this.$on('toolbar:applyStyle', style => {
       console.log('table style', style);
@@ -57,7 +57,9 @@ export class Table extends ExcelComponent {
   selectCell($cell){
     this.selection.select($cell); 
     this.$emit('table:select', $cell);
-    console.log($cell.getStyles(Object.keys(defaultStyles)));
+    const styles = $cell.getStyles(Object.keys(defaultStyles));
+    console.log('styles to dispatch', styles)
+    this.$dispatch(actions.changeStyles(styles));
   }
 
 
