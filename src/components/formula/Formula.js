@@ -42,7 +42,7 @@ export class Formula extends ExcelComponent {
   }
   
   storeChanged(changes){
-    console.log('storeChanged', changes)
+    //console.log('storeChanged', changes)
   }
 
   onInput(event) {

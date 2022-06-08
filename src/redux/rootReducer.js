@@ -9,11 +9,11 @@ export function rootReducer(state, action){
         case(TABLE_RESIZE):
             field = action.data.type === 'col' ? 'colState' : 'rowState';
             //нізя мутувати старий стейт, потрібно повертати новий стейт тому ... оператор 
-            return {...state, [field]: value(state, field. action)} //потрібно ід колонки, value, 
+            return {...state, [field]: value(state, field, action)} //потрібно ід колонки, value, 
 
         case(CHANGE_TEXT):
             field = 'dataState';            
-            return {...state, currentText: action.data.value, [field]: value(state, field. action)}
+            return {...state, currentText: action.data.value, [field]: value(state, field, action)}
 
         case(CHANGE_STYLES):
             return {...state, currentStyles: action.data }
