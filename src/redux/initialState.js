@@ -13,7 +13,7 @@ const defaultState = {
 
 const normalize = state =>({
     ...state,
-    currentStyles: defaultState,
+    currentStyles: defaultStyles,
     currentText: ''
 }) 
 
