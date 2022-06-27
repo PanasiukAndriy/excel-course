@@ -13,6 +13,7 @@ import { Table } from "../components/table/Table";
 
 export class ExcelPage extends Page{
     getRoot(){
+        
         const store = createStore(rootReducer, initialState);
 
         const stateListener = debounce(state => {
