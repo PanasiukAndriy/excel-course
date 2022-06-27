@@ -1,7 +1,7 @@
-import {$} from '../dom'
+import {$} from '../dom';
 import { ActiveRoute } from './ActiveRoute';
 
-export class Roter{
+export class Router{
     constructor(selector, routes){
         if(!selector){
             throw new Error('Router: selector is recuired!')
@@ -20,10 +20,14 @@ export class Roter{
     }
 
     changePageHandler(event){
-        console.log(ActiveRoute.path);
-        console.log(ActiveRoute.param);
+        // console.log(ActiveRoute.path);
+        // console.log(ActiveRoute.param);
 
-        this.$placeholder.html(ActiveRoute.path);
+        const Page = this.routes.excel;
+        const page = new Page();
+        this.$placeholder.append(page.getRoot());
+
+        page.afterRender();
     } 
 
     destroy(){
