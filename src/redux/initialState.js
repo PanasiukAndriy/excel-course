@@ -8,7 +8,8 @@ const defaultState = {
     dataState: {}, // format {'1:1': 'sdfsf'}
     stylesState: {},
     currentText: '',
-    currentStyles: defaultStyles
+    currentStyles: defaultStyles,
+    openedDate: new Date().toJSON()
 }
 
 const normalize = state =>({
